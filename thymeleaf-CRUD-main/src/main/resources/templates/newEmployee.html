@@ -14,6 +14,11 @@
             var maxDate = 2005 + "-12-31";
             dateField.setAttribute("max", maxDate);
         };
+ function clearValidationMessage(inputElement) {
+		console.log(inputElement);
+        inputElement.nextElementSibling.textContent = '';
+
+  }
     </script>
     </head>
 
@@ -26,42 +31,59 @@
         <form action="#" th:action="@{/saveEmployee}" th:object="${employee}" method="POST" name="EmployeeForm"  >
 			
 			<label for="Employee Id">Employee Id:</label>
-			<input type="text" th:field="*{id}"  class="form-control mb-4 col-4" id="id" required /> 
-			<td th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Id
-     Error</td>
+			<input type="text" th:field="*{id}" onkeypress="value=value.toUpperCase()"  onkeyup="clearValidationMessage(this)" class="form-control mb-4 col-4 " id="id"  /> 
+			<p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="alert alert-danger" style="width: 70%;">IdError</p>
 			
-			<label for="Employee Name">Employee Name:</label>
-            <input type="text"  th:field="*{name}" id="name" name="Employee Name" pattern="[a-zA-Z. ]+" class="form-control mb-4 col-4" required/>
+			<label for="Employee Name" >Employee Name:</label>
+            <input type="text"  th:field="*{name}" id="name" name="Employee Name"  class="form-control mb-4 col-4" />
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger d-flex align-items-center" role="alert" style="width: 70%;">Name Error</p>
+            <br>
+            
+             <label for="gender" id="gender" >Gender:</label>
+             <input type="radio" th:field="*{gender}" value="Male" /> Male
+             <input type="radio" th:field="*{gender}" value="Female"  /> Female
+                         <p th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="alert alert-danger" style="width: 30%;">Gender Error</p>
 
-             <label for="gender" id="gender" required>Gender:</label>
-             <input type="radio" th:field="*{gender}" value="Male" required/> Male
-             <input type="radio" th:field="*{gender}" value="Female"  required/> Female
-            <!-- <input type="radio" name="gender"  value="male" > Male <input type="radio" name="gender" value="female"> Female -->
+            <!-- <input type="ra
+            dio" name="gender"  value="male" > Male <input type="radio" name="gender" value="female"> Female -->
 
             <br>
                 <br>
                 
                 <label for="Employee Dob" required>Employee Dob:</label>
-            <input type="date" th:field="*{dob}" id="dob" name="dob"  class="form-control mb-4 col-4" required/>
+            <input type="date" th:field="*{dob}" id="dob" name="dob"  class="form-control mb-4 col-4" />
+                      <p th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}" class="alert alert-danger" style="width: 70%;" >Date of Birth Error</p>
 
-            <!-- <input type="text" th:field="*{designation}" placeholder="Employee Designation" class="form-control mb-4 col-4" > -->
-
-            <tr>
+<!--<tr>
 				  <label for="Designation">Designation:</label>
                 <td>
-                   <select th:field="*{designation}"  class="form-control mb-4 col-4" required/>
-                    <option value="" id="designation" >Select the  Designation</option>
+                   <select th:field="*{designation}" id="designation" class="form-control mb-4 col-4" />
+                   <option value="" id="designation" >Select the  Designation</option>
                     <option th:value="WebDevloper" th:text="WebDevloper"></option>
                       <option th:value="FlutterDeveloper" th:text="FlutterDeveloper"></option>
                       <option th:value="AngularDeveloper" th:text="AngularDeveloper"></option>
-                      <option th:value="PythonDeveloper" th:text="PythonDeveloper"></option>
+                      <option th:value="PythonDeveloper" th:text="PythonDeveloper"></option> 
                    </select>
+                      <p th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}" class="alert alert-danger" style="width: 40%;">Designation Error</p>
                 </td>
-            </tr>
+            </tr>   -->
+            <label for="Designation">Designation:</label>
+            
+        <select th:field="*{designation}" id="designation" class="form-control mb-4 col-4" />
+        <option value="" id="designation" >Select the  Designation</option>
+        <option  th:each="designation : ${designation}" th:value="${designation.code}" th:text="${designation.field}" ></option>
+        <p th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}" class="alert alert-danger" style="width: 40%;">Designation Error</p>
+
+    </select>
+
+        <br/>     
             
               <label for="Salary">Salary:</label>
-            <input type="number" th:field="*{salary}" id="salary" pattern="[1-9]?" title="Please enter a valid salary amount "  class="form-control mb-4 col-4"  required/>
-
+      <!--      <input type="text" th:field="*{salary}" id="salary"    class="form-control mb-4 col-4"  required/> -->
+      <input th:var="salaryType" th:field="*{salary}" id="salary"    class="form-control mb-4 col-4" >
+  <p th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}" class="alert alert-danger" style="width: 40%;">Salary Error</p>
+            <br>
+            
             
 
             <button type="submit" class="btn btn-info col-2" id="save"> Save </button>

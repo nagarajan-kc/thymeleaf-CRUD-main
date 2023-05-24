@@ -1,15 +1,20 @@
 package com.nic.employee.Entity;
 
-import java.sql.Date;
 
-import jakarta.persistence.Column;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+//import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+//import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-//import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 
@@ -18,17 +23,28 @@ import jakarta.validation.constraints.Size;
 public class Employee {
 
 	@Id
-	@Column(name="id")
+	@Pattern(regexp = "^[A-Z]{3}[0-9]{3}$", message = "Invalid format the first three characters are alphabetic and the next three characters are numeric")
 	private String id;
 	
-
-//	public int getId() {
-//		return id;
-//	}
-//
-//	public void setId(int id) {
-//		this.id = id;
-//	}
+    @Pattern(regexp = "[a-zA-Z. ]+",message = "Invalid format Give the proper format of alphabetic")
+	@Size(min = 3, max = 50,message = "The Name given was in the Invalid Format the length sholud be in between 3 and 50")
+    @NotEmpty(message = "Employee name cannot be empty.")
+	private String name;
+	
+    @NotBlank(message = "Please Provide the Gender") 
+	private String gender;
+	
+    @NotNull(message = "Date of birth is required")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dob;
+	
+	@NotBlank(message = "Please Give The  Designation")
+    @NotNull(message = "Please Give The  Designation")
+	private String designation;
+	
+	@NotNull(message = "Please enter a valid salary")
+    @Min(value=10000, message = "Salary must be atleast 10000")
+	private long salary;
 
 	public String getId() {
 		return id;
@@ -37,23 +53,6 @@ public class Employee {
 	public void setId(String id) {
 		this.id = id;
 	}
-
-    @NotEmpty(message = "Employee name cannot be empty.")
-	@Size(min = 3, max = 50,message = "{Size.Person.FullName}")
-	private String name;
-	
-	@Column 
-	private String gender;
-	
-	@Column 
-	private Date dob;
-	
-	@Column
-	private String designation;
-	
-	@Column 
-	private long salary;
-	
 
 	public String getName() {
 		return name;
@@ -71,11 +70,11 @@ public class Employee {
 		this.gender = gender;
 	}
 
-	public Date getDob() {
+	public LocalDate getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 
@@ -94,16 +93,9 @@ public class Employee {
 	public void setSalary(long salary) {
 		this.salary = salary;
 	}
+	
 
-	public String getEmployeeName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	public String getEmployeeId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 	

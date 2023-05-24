@@ -53,13 +53,13 @@
             <!-- <input type="text" th:field="*{designation}" class="form-control mb-4 col-4" > -->
             <tr>
 				 <label for="Designation">Designation:</label>
-                <td>
-                   <select th:field="*{designation}" placeholder="Employee Designation" class="form-control mb-4 col-4">
-                    <option th:value="WebDevloper" th:text="WebDevloper"></option>
-                      <option th:value="FlutterDeveloper" th:text="FlutterDeveloper"></option>
-                      <option th:value="AngularDeveloper" th:text="AngularDeveloper"></option>
-                      <option th:value="PythonDeveloper" th:text="PythonDeveloper"></option>
-                   </select>
+            
+        <select th:field="*{designation}" id="designation" class="form-control mb-4 col-4" />
+        <option  th:each="designation : ${designation}" th:value="${designation.code}" th:text="${designation.field}"></option>
+    </select>
+                          <p th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}" class="alert alert-danger" style="width: 40%;">Designation Error</p>
+
+        <br/>   
                 </td>
             </tr>
             
