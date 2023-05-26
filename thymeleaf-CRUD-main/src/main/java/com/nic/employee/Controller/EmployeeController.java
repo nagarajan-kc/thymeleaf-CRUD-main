@@ -28,7 +28,7 @@ public class EmployeeController {
    
     @GetMapping("/Employee")
     public String viewHomePage(Model model) {
-        model.addAttribute("listEmployees", employeeService.getAllEmployees());
+        model.addAttribute("listEmployees", employeeService.getAllEmployees()); 
         return "index";
     }
 
@@ -38,13 +38,16 @@ public class EmployeeController {
         List<Designation> designation = employeeService.getAllDesignation();
         model.addAttribute("designation", designation);
         model.addAttribute("employee", employee);
+        model.addAttribute(designation);
         return "newEmployee";
  }
 
     @PostMapping("/saveEmployee")
-    public String saveEmployee(@Valid @ModelAttribute("employee") Employee employee,BindingResult bindingResult) {
-    	 if (bindingResult.hasErrors()) {
-    		 
+    public String saveEmployee(@Valid @ModelAttribute("employee") Employee employee,BindingResult bindingResult,Model model) {
+    	
+    	if (bindingResult.hasErrors()) {  
+    		  List<Designation> designation = employeeService.findAll();
+    	        model.addAttribute("designation", designation);
              return "newEmployee";
          }
        employeeService.saveEmployee(employee);

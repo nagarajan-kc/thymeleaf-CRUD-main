@@ -1,9 +1,5 @@
 package com.nic.master.Designation;
 
-
-
-import org.springframework.web.bind.annotation.CrossOrigin;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -11,8 +7,7 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="designation")
-@CrossOrigin(origins =
-{ "*" })
+
 public class Designation {
 
 	@NotBlank(message = "Please Give The  Designation")
@@ -35,5 +30,6 @@ public class Designation {
 	public void setField(String field) {
 		this.field = field;
 	}
+	
 
 }

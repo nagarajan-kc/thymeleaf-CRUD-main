@@ -17,4 +17,6 @@ public interface EmployeeService {
     
     List<Designation> getAllDesignation() ;
 
+	List<Designation> findAll();
+
 }

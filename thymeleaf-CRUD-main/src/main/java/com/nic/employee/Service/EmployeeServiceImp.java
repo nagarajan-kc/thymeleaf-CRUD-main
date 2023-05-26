@@ -14,6 +14,7 @@ import com.nic.master.Designation.Designation;
 
 
 
+
 @Service
 public class EmployeeServiceImp implements EmployeeService {
 
@@ -25,9 +26,11 @@ public class EmployeeServiceImp implements EmployeeService {
 
     @Override
     public List < Employee > getAllEmployees() {
-        return employeeRepository.findAll();
+        String query = "Select * From employee";
+        List<Employee> employee = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Employee.class));
+        return employee;
     }
-//
+
     @Override
     public void saveEmployee(Employee employee) {
        this.employeeRepository.save(employee);
@@ -53,6 +56,14 @@ public class EmployeeServiceImp implements EmployeeService {
 	@Override
 	public List<Designation> getAllDesignation() {
 		String query = "SELECT * FROM designation";
+        List<Designation> designation = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Designation.class));
+        return designation;
+	}
+	
+	
+	@Override
+	public List<Designation> findAll() {
+		String query ="SELECT * FROM designation";
         List<Designation> designation = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Designation.class));
         return designation;
 	}
