@@ -76,13 +76,12 @@
             
         <select th:field="*{designation}" id="designation" class="form-control mb-4 col-4" required/>
         <option value="" id="designation" >Select the  Designation</option>
-        <option  th:each="designation : ${designation}"  th:value="${designation.code}" th:selected="${lastselected eq designation.code}" th:text="${designation.field}" >
-			
+        <option  th:each="designation : ${designation}"  th:value="${designation.code}"  th:text="${designation.field}" >
 		</option>
         
-        <span th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}" class="alert-danger d-flex align-items-center" style="width: 40%;">Designation Error</span>
 
     </select>
+        <span th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}" class="alert-danger d-flex align-items-center" style="width: 40%;">Designation Error</span>
 
         <br/>     
             

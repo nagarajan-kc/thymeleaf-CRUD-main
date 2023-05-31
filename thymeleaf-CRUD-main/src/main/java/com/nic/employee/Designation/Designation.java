@@ -1,6 +1,8 @@
-package com.nic.master.Designation;
+package com.nic.employee.Designation;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -10,18 +12,22 @@ import jakarta.validation.constraints.NotNull;
 
 public class Designation {
 
+	@Id
 	@NotBlank(message = "Please Give The  Designation")
     @NotNull(message = "Please Give The  Designation")
-	private Long code;
+	@Column(name="code")
+	private String code;
 	
 	@NotBlank(message = "Please Give The  Designation")
     @NotNull(message = "Please Give The  Designation")
+	@Column(name="field")
 	private String field;
 	
-	public Long getCode() {
+	
+	public String getCode() {
 		return code;
 	}
-	public void setCode(Long code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 	public String getField() {

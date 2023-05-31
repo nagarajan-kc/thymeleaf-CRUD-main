@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.nic.employee.Designation.Designation;
 import com.nic.employee.Entity.Employee;
 import com.nic.employee.Service.EmployeeService;
-import com.nic.master.Designation.Designation;
 
 import jakarta.validation.Valid;
 
@@ -56,10 +56,9 @@ public class EmployeeController {
 
  @GetMapping("/Update/{id}")
  public String showFormForUpdate(@PathVariable ( value = "id") String id, Model model) {
-  
   Employee employee = employeeService.getEmployeeById(id);
   model.addAttribute("employee", employee);
-  List<Designation> designation = employeeService.getAllDesignation();
+  List<Designation> designation = employeeService.findAll();
   model.addAttribute("designation", designation);
   return "updateemployee";
  }
