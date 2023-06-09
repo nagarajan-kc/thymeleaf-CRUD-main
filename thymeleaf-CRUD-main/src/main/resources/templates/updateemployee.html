@@ -51,23 +51,22 @@
             <input type="date" th:field="*{dob}" id="dob" name="dob"  value="EMP[0-9]+" class="form-control mb-4 col-4" required>
 
             <!-- <input type="text" th:field="*{designation}" class="form-control mb-4 col-4" > -->
-            <tr>
+            <br>
 				 <label for="Designation">Designation:</label>
             
-        <select th:field="*{designation}" id="designation" class="form-control mb-4 col-4" required/>
+        <select th:field="*{designation}" id="designation" class="form-control mb-4 col-4" required>
                 <option value="" id="designation" >Select the  Designation</option>
 
-        <option  th:each="designation : ${designation}" th:value="${designation.code}" th:text="${designation.field}"></option>
+        <option  th:each="designation : ${designation}" th:value="${designation.code}" th:text="${designation.field}" th:selected="${designation.code == employee.designation}"></option>
     </select>
                           <p th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}" class="alert alert-danger" style="width: 40%;">Designation Error</p>
 
-        <br/>   
-                </td>
-            </tr>
+        <br>   
+           
             
             <label for="Salary">Salary:</label>
             
-            <input type="number" th:field="*{salary}" class="form-control mb-4 col-4" required>
+            <input th:var="salaryType" th:field="*{salary}" id="salary" class="form-control mb-4 col-4" required>
 
             <button type="submit" class="btn btn-info col-2" style="background-color:green;color:white;"> Update Employee</button>
         </form>

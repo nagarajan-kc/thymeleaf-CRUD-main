@@ -12,7 +12,7 @@ public class EmployeeData {
 	
 	private String empDob;
 	
-	private Long salary;
+	private Double salary;
 	
 	private String designationCode;
 
@@ -64,13 +64,15 @@ public class EmployeeData {
 		this.empDob = empDob;
 	}
 
-	public Long getSalary() {
+	public Double getSalary() {
 		return salary;
 	}
 
-	public void setSalary(Long salary) {
+	public void setSalary(Double salary) {
 		this.salary = salary;
 	}
+
+	
 	
 	
 }

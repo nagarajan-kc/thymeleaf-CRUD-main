@@ -58,7 +58,7 @@ public class EmployeeController {
  public String showFormForUpdate(@PathVariable ( value = "id") String id, Model model) {
   Employee employee = employeeService.getEmployeeById(id);
   model.addAttribute("employee", employee);
-  List<Designation> designation = employeeService.findAll();
+  List<Designation> designation = employeeService.getAllDesignation();
   model.addAttribute("designation", designation);
   return "updateemployee";
  }

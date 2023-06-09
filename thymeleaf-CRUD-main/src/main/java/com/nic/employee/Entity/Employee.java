@@ -15,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
 //import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -29,11 +30,11 @@ import jakarta.validation.constraints.Size;
 public class Employee {
 
 	@Id
-	@Pattern(regexp = "^[A-Z]{3}[0-9]{3}$", message = "Invalid format the first three characters are alphabetic and the next three characters are numeric")
+	@Pattern(regexp = "^[A-Z]{3}[0-9]{3}$", message = "Invalid format the first three characters Should be alphabetic and the next three characters Should be numeric")
 	@Column(name = "id")
 	private String id;
 	
-    @Pattern(regexp = "[a-zA-Z. ]+",message = "Invalid format Give the proper format of alphabetic")
+    @Pattern(regexp = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",message = "Invalid format Give the proper format of alphabetic")
 	@Size(min = 3, max = 50,message = "The Name given was in the Invalid Format the length sholud be in between 3 and 50")
     @NotEmpty(message = "Employee name cannot be empty.")
 	@Column(name = "name")
@@ -53,10 +54,11 @@ public class Employee {
 	@Column(name = "designation")
 	private String designation;
 	
-	@NotNull(message = "Please enter a valid salary")
-    @Min(value=10000, message = "Salary must be atleast 10000")
-	@Column(name = "salary")
-	private long salary;
+	
+	@NotNull(message = "Please enter salary")
+	@Min(value=10000, message = "Salary must be atleast 10000.00")
+	@Max(value=100000, message = "Salary should not be greater than 100000.00")
+	private Double salary;
 
 	 @Formula("(select des.field from  Designation des where designation=des.code)")
 	private String designationdesc;
@@ -111,15 +113,15 @@ public class Employee {
 		this.designation = designation;
 	}
 
-	public long getSalary() {
+	public Double getSalary() {
 		return salary;
 	}
 
-	public void setSalary(long salary) {
+	public void setSalary(Double salary) {
 		this.salary = salary;
 	}
-	
 
+	
 
 
 	

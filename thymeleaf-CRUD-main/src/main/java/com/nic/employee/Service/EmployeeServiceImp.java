@@ -36,7 +36,6 @@ public class EmployeeServiceImp implements EmployeeService {
     	
     	 List <EmployeeData> empList=new ArrayList<EmployeeData>();
         String query = "Select * From employee";
-//    	String query = "select id,field,dob,gender,name,salary from  employee emp join designation des on emp.designation = des.code";
         List<Employee> employee = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Employee.class));
         for(Employee a:employee) {
         	EmployeeData emp=new EmployeeData();
@@ -54,7 +53,7 @@ public class EmployeeServiceImp implements EmployeeService {
         	String designationCode=a.getDesignation();
         	emp.setDesignationCode(designationCode);
         	
-        	Long salary=a.getSalary();
+        	Double salary=a.getSalary();
         	emp.setSalary(salary);
         			
         	LocalDate dob=a.getDob();

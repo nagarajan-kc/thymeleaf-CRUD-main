@@ -39,7 +39,7 @@
 			<br>
 			
 			<label for="Employee Name" >Employee Name:</label>
-            <input type="text"  th:field="*{name}" id="name" name="Employee Name" onkeyup="clearValidationMessage(this)" class="form-control mb-4 col-4" required/>
+            <input type="text"  th:field="*{name}" id="name" name="Employee Name" pattern="[a-zA-Z. ]+" onkeyup="clearValidationMessage(this)" class="form-control mb-4 col-4" required/>
             <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class=" alert-danger d-flex align-items-center" role="alert" style="width: 70%;">Name Error</p>
             <br>
             
@@ -74,9 +74,9 @@
             <br>
             <label for="Designation">Designation:</label>
             
-        <select th:field="*{designation}" id="designation" class="form-control mb-4 col-4" required/>
+        <select th:field="*{designation}" id="designation" class="form-control mb-4 col-4" required>
         <option value="" id="designation" >Select the  Designation</option>
-        <option  th:each="designation : ${designation}"  th:value="${designation.code}"  th:text="${designation.field}" >
+        <option  th:each="designation : ${designation}"  th:value="${designation.code}"  th:text="${designation.field}"  >
 		</option>
         
 
